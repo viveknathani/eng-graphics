@@ -1,11 +1,12 @@
 #include<iostream>
 #include "shapes.h"
+#include<GL/glut.h>
 
 using namespace std;
 
-int main()
+int main(int argc, char** argv)
 {
-  vivek v;
-  v.printit();
+  Rectangle r;
+  r.screenSetup(argc, argv);
   return 0;
 }
