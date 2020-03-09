@@ -13,7 +13,7 @@ void Rectangle::screenSetup(int argc, char** argv)
 
   glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 
-  glutInitWindowSize(width, height);
+  glutInitWindowSize(window_width, window_height);
 
   glutCreateWindow("Rectangle");
 
@@ -35,6 +35,7 @@ void Rectangle::screenSetup(int argc, char** argv)
 void Rectangle::show()
 {
   drawXYLine();
+  drawRectangle();
 }
 
 void Rectangle::drawXYLine()
@@ -58,6 +59,24 @@ void Rectangle::drawXYLine()
   output(-500, -40, "X");
   output(480, -40, "Y");
   glFlush();
+}
+
+void Rectangle::drawRectangle()
+{
+    glColor3f(0.0,1.0,0.0);
+
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+    glBegin(GL_POLYGON);
+        glVertex2i(-480,10);  //x1, y1
+        glVertex2i(-480+(45*5), 10);   //x2, y1
+        glVertex2i(-480+(45*5), 10+(25*5));  //x2, y2
+        glVertex2i(-480, 10+(25*5));   //x1, y2
+    glEnd();
+
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+    glFlush();
 }
 
 void Rectangle::output(int x, int y, const char *string)
