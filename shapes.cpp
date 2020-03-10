@@ -27,15 +27,11 @@ void Rectangle::screenSetup(int argc, char** argv)
 
   gluOrtho2D(-780, 780, -420, 420);
 
-	glutDisplayFunc(show);
+  drawXYLine();
+
+  drawRectangle();
 
 	glutMainLoop();
-}
-
-void Rectangle::show()
-{
-  drawXYLine();
-  drawRectangle();
 }
 
 void Rectangle::drawXYLine()
@@ -69,9 +65,9 @@ void Rectangle::drawRectangle()
 
     glBegin(GL_POLYGON);
         glVertex2i(-480,10);  //x1, y1
-        glVertex2i(-480+(45*5), 10);   //x2, y1
-        glVertex2i(-480+(45*5), 10+(25*5));  //x2, y2
-        glVertex2i(-480, 10+(25*5));   //x1, y2
+        glVertex2i(-480+(shape_width*5), 10);   //x2, y1
+        glVertex2i(-480+(shape_width*5), 10+(shape_height*5));  //x2, y2
+        glVertex2i(-480, 10+(shape_height*5));   //x1, y2
     glEnd();
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -89,4 +85,10 @@ void Rectangle::output(int x, int y, const char *string)
   {
   	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, string[i]);
   }
+}
+
+Rectangle::Rectangle(int x, int y)
+{
+  shape_width=x;
+  shape_height=y;
 }
