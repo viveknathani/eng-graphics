@@ -59,18 +59,55 @@ void Rectangle::drawXYLine()
 
 void Rectangle::drawRectangle()
 {
-    glColor3f(0.0,1.0,0.0);
+    glColor3f(1.0,1.0,0.0);
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-    glBegin(GL_POLYGON);
-        glVertex2i(-480,10);  //x1, y1
-        glVertex2i(-480+(shape_width*5), 10);   //x2, y1
-        glVertex2i(-480+(shape_width*5), 10+(shape_height*5));  //x2, y2
-        glVertex2i(-480, 10+(shape_height*5));   //x1, y2
-    glEnd();
+    if(forHP==true)
+    {
+      glBegin(GL_POLYGON);
+            glVertex2i(-460,-50);  //x1, y1
+            glVertex2i(-460+(shape_width*5), -50);   //x2, y1
+            glVertex2i(-460+(shape_width*5), -50-(shape_height*5));  //x2, y2
+            glVertex2i(-460, -50-(shape_height*5));   //x1, y2
+      glEnd();
+            output(-480, -60, "a"); //x1, y1 point
+            output(-450+(shape_width*5), -60, "c"); //x2, y1 point
+            output(-450+(shape_width*5), -70-(shape_height*5), "d"); //x3, y3 point
+            output(-480, -70-(shape_height*5), "b"); //x4, y4 point
+      glBegin(GL_LINES);
+          glVertex2i(-480,0);
+          glVertex2i(-450+(shape_width*5), 0);
+      glEnd();
+          output(-485, 10, "a\', b\'");
+          output(-455+(shape_width*5), 10, "c\', d\'");
+    }
+    else
+    {
+      glBegin(GL_POLYGON);
+            glVertex2i(-460,50);  //x1, y1
+            glVertex2i(-460+(shape_width*5), 50);   //x2, y1
+            glVertex2i(-460+(shape_width*5), 50+(shape_height*5));  //x2, y2
+            glVertex2i(-460, 50+(shape_height*5));   //x1, y2
+      glEnd();
+            output(-480, 50, "b\'"); //x1, y1 point
+            output(-450+(shape_width*5), 50, "c\'"); //x2, y1 point
+            output(-450+(shape_width*5), 50+(shape_height*5), "d\'"); //x3, y3 point
+            output(-480, 50+(shape_height*5), "a\'"); //x4, y4 point
+    }
+
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+    // if(forHP==true)
+    // {
+    //   glBegin(GL_LINES);
+    //       glVertex2i(-480,0);
+    //       glVertex2i(-450+(shape_width*5), 0);
+    //   glEnd();
+    //       output(-485, 10, "a\', b\'");
+    //       output(-455+(shape_width*5), 10, "c\', d\'");
+    // }
 
     glFlush();
 }
@@ -87,8 +124,19 @@ void Rectangle::output(int x, int y, const char *string)
   }
 }
 
-Rectangle::Rectangle(int x, int y)
+Rectangle::Rectangle()
 {
-  shape_width=x;
-  shape_height=y;
+  cout<<"Enter shape width : ";
+  cin>>shape_width;
+  cout<<"Enter shape height : ";
+  cin>>shape_height;
+  cout<<"Enter plane angle value in degrees : ";
+  cin>>plane_angle;
+  cout<<"Enter edge angle value in degrees : ";
+  cin>>edge_angle;
+  char check;
+  cout<<"Is the plane angle value an inclination for HP? (y/n) : ";
+  cin>>check;
+  if(check=='y' || check=='Y') { forHP=true; }
+  else { forHP=false; }
 }

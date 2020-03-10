@@ -6,9 +6,7 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-  int x, y;
-  cin>>x>>y;
-  Rectangle r(x, y);
+  Rectangle r;
   r.screenSetup(argc, argv);
   return 0;
 }

@@ -5,9 +5,10 @@ class Rectangle
 private:
   int window_width=1366;
   int window_height=768;
-  int shape_width, shape_height;
+  int shape_width, shape_height, plane_angle, edge_angle;
+  bool forHP;
 public:
-  Rectangle(int x, int y);
+  Rectangle();
   void screenSetup(int argc, char** argv);
   void drawXYLine();
   void drawRectangle();
