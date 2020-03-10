@@ -98,17 +98,6 @@ void Rectangle::drawRectangle()
 
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-    // if(forHP==true)
-    // {
-    //   glBegin(GL_LINES);
-    //       glVertex2i(-480,0);
-    //       glVertex2i(-450+(shape_width*5), 0);
-    //   glEnd();
-    //       output(-485, 10, "a\', b\'");
-    //       output(-455+(shape_width*5), 10, "c\', d\'");
-    // }
-
     glFlush();
 }
 
