@@ -7,6 +7,6 @@ using namespace std;
 int main(int argc, char** argv)
 {
   Rectangle r;
-  r.screenSetup(argc, argv);
+  r.screenSetup(argc, zargv);
   return 0;
 }
