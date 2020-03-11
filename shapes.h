@@ -6,7 +6,7 @@ private:
   int window_width=1366;
   int window_height=768;
   int shape_width, shape_height, plane_angle, edge_angle;
-  bool forHP;
+  bool forHP, eforHP;
 public:
   Rectangle();
   void screenSetup(int argc, char** argv);

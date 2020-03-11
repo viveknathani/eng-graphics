@@ -123,9 +123,12 @@ Rectangle::Rectangle()
   cin>>plane_angle;
   cout<<"Enter edge angle value in degrees : ";
   cin>>edge_angle;
-  char check;
+  char plane_check, edge_check;
   cout<<"Is the plane angle value an inclination for HP? (y/n) : ";
-  cin>>check;
-  if(check=='y' || check=='Y') { forHP=true; }
-  else { forHP=false; }
+  cin>>plane_check;
+  if(plane_check=='y' || plane_check=='Y') { forHP=true; }
+  cout<<"Is the edge angle value an inclination for HP? (y/n) : ";
+  cin>>edge_check;
+  if(edge_check=='y' || edge_check=='Y') { eforHP=true; }
+  else { eforHP=false; }
 }
