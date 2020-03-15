@@ -167,8 +167,8 @@ void Rectangle::stage2()
           glVertex2f(-380+(shape_width*5), -50-(shape_height*5));   //x1, y2
     glEnd();
           output(-400+(shape_width*5), -60, "a"); //x1, y1 point
-          output(-370+(shape_width*5)+(shape_width*5*cos(plane_angle*pi/180)), -60, "c"); //x2, y1 point
-          output(-370+(shape_width*5)+(shape_width*5*cos(plane_angle*pi/180)), -70-(shape_height*5), "d"); //x3, y3 point
+          output(-370+(shape_width*5)+(shape_width*5*cos(plane_angle*pi/180)), -60, "d"); //x2, y1 point
+          output(-370+(shape_width*5)+(shape_width*5*cos(plane_angle*pi/180)), -70-(shape_height*5), "c"); //x3, y3 point
           output(-400+(shape_width*5), -70-(shape_height*5), "b"); //x4, y4 point
   }
   else
@@ -227,7 +227,6 @@ void Rectangle::drawArc(float center_x, float center_y, float arc_angle, float a
 void Rectangle::stage3()
 {
   glColor3f(1.0,1.0,1.0);
-  glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
   if(eforHP==false)
   {
@@ -245,12 +244,16 @@ void Rectangle::stage3()
     float *interesction_c;
     float *interesction_d;
     interesction_b=findInterSection(points1, points2, slope1, slope2);
+    float b1=*(interesction_b);
+    float b2=*(interesction_b+1);
     cout<<"Log : "<<"Back in function stage3() "<<endl;
     cout<<"Log : "<<"Using ("<<*(interesction_b)<<","<<*(interesction_b+1)<<")"<<endl;
     //a
     points1[0]=-380+(shape_width*5);
     points1[1]=-50;
     interesction_a=findInterSection(points1, points2, slope1, slope2);
+    float a1=*(interesction_a);
+    float a2=*(interesction_a+1);
     //pushing c and d ahead
     float pushlength=shape_width*5*sin(plane_angle*pi/180);
     //d
@@ -259,6 +262,8 @@ void Rectangle::stage3()
     interesction_d=findInterSection(points1, points2, slope1, slope2);
     *(interesction_d)+=pushlength*cos(edge_angle*pi/180);
     *(interesction_d+1)+=pushlength*sin(-edge_angle*pi/180);
+    float d1=*(interesction_d);
+    float d2=*(interesction_d+1);
     cout<<"Log : "<<"Using ("<<*(interesction_d)<<","<<*(interesction_d+1)<<")"<<endl;
     //c
     points1[0]=-380+(shape_width*5)+(shape_width*5*cos(plane_angle*pi/180));
@@ -266,20 +271,71 @@ void Rectangle::stage3()
     interesction_c=findInterSection(points1, points2, slope1, slope2);
     *(interesction_c)+=pushlength*cos(edge_angle*pi/180);
     *(interesction_c+1)+=pushlength*sin(-edge_angle*pi/180);
+    float c1=*(interesction_c);
+    float c2=*(interesction_c+1);
     cout<<"Log : "<<"Using ("<<*(interesction_c)<<","<<*(interesction_c+1)<<")"<<endl;
 
-    glBegin(GL_POLYGON);
-          glVertex2f(*(interesction_a), *(interesction_a+1));
-          glVertex2f(*(interesction_b), *(interesction_b+1));
-          glVertex2f(*(interesction_d), *(interesction_d+1));
-          glVertex2f(*(interesction_c), *(interesction_c+1));
-    glEnd();
+    cout<<"Log : "<<a1<<"  "<<a2<<"  "<<b1<<"  "<<b2<<"  "<<c1<<"  "<<c2<<"  "<<d1<<"  "<<d2<<endl;
+
+    cout<<"Reading coordinates.."<<endl;
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+  	glBegin(GL_POLYGON);
+    glVertex2f(a1, a2);
+    glVertex2f(b1, b2);
+    glVertex2f(d1, d2);
+    glVertex2f(c1, c2);
+  	glEnd();
+  	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    cout<<"Successful!"<<endl;
   }
   else
   {
-    //do something
+    float points1[]={-380+(shape_width*5),50+(shape_height*5)};
+    float points2[]={-380+(shape_width*5), 50+(shape_height*5)-350};
+    float slope1=tan((edge_angle)*pi/180);
+    float slope2=tan((90-edge_angle)*pi/180);
+    float *interesction_a;
+    float *interesction_b;
+    float *interesction_c;
+    float *interesction_d;
+    interesction_b=findInterSection(points1, points2, slope1, slope2);
+    float b1=*(interesction_b);
+    float b2=*(interesction_b+1);
+    //a
+    points1[0]=-380+(shape_width*5);
+    points1[1]=+50;
+    interesction_a=findInterSection(points1, points2, slope1, slope2);
+    float a1=*(interesction_a);
+    float a2=*(interesction_a+1);
+    //pushing c and d ahead
+    float pushlength=shape_width*5*sin(plane_angle*pi/180);
+    //d
+    points1[0]=-380+(shape_width*5)+(shape_width*5*cos(plane_angle*pi/180));
+    points1[1]=50+(shape_height*5);
+    interesction_d=findInterSection(points1, points2, slope1, slope2);
+    *(interesction_d)+=pushlength*cos(edge_angle*pi/180);
+    *(interesction_d+1)+=pushlength*sin(edge_angle*pi/180);
+    float d1=*(interesction_d);
+    float d2=*(interesction_d+1);
+
+    //c
+    points1[0]=-380+(shape_width*5)+(shape_width*5*cos(plane_angle*pi/180));
+    points1[1]=50;
+    interesction_c=findInterSection(points1, points2, slope1, slope2);
+    *(interesction_c)+=pushlength*cos(edge_angle*pi/180);
+    *(interesction_c+1)+=pushlength*sin(edge_angle*pi/180);
+    float c1=*(interesction_c);
+    float c2=*(interesction_c+1);
+
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+  	glBegin(GL_POLYGON);
+    glVertex2f(a1, a2);
+    glVertex2f(b1, b2);
+    glVertex2f(d1, d2);
+    glVertex2f(c1, c2);
+  	glEnd();
+  	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
   }
-  glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
   glFlush();
 }
 
