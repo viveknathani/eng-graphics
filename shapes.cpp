@@ -1,8 +1,16 @@
+/*
+  Project : Engineering Graphics
+  Author: Vivek Nathani
+  Year: 2020
+*/
+
+
 #include<iostream>
 #include "shapes.h"
 #include<GL/glut.h>
 #include<string.h>
 #include<math.h>
+
 #define pi 3.142857
 
 using namespace std;
@@ -29,7 +37,7 @@ void Rectangle::screenSetup(int argc, char** argv)
 
   drawXYLine();
 
-  drawRectangle();
+  stage1();
 
   stage2();
 
@@ -61,7 +69,7 @@ void Rectangle::drawXYLine()
   glFlush();
 }
 
-void Rectangle::drawRectangle()
+void Rectangle::stage1()
 {
     glColor3f(1.0,1.0,0.0);
 
