@@ -1,9 +1,12 @@
-#include<iostream>
+/*
+  Project : Engineering Graphics
+  Author: Vivek Nathani
+  Year: 2020
+*/
+
 #include "shapes.h"
-#include<GL/glut.h>
 
-using namespace std;
-
+//driver code
 int main(int argc, char** argv)
 {
   Rectangle r;
