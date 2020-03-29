@@ -11,6 +11,7 @@
 #include "shapes.h"
 #include<GL/glut.h>
 #include<string.h>
+#include<sstream>
 #include<math.h>
 
 #define pi 3.142857
@@ -137,6 +138,21 @@ Rectangle::Rectangle()
 
 void Rectangle::stage1()
 {
+    using namespace std;
+    stringstream ss;
+    ss<<shape_width;
+    string s;
+    ss>>s;
+    int n=s.length();
+    char shape_w[n+1];
+    strcpy(shape_w, s.c_str());
+    stringstream ss_2;
+    ss_2<<shape_height;
+    ss_2>>s;
+    n=s.length();
+    char shape_h[n+1];
+    strcpy(shape_h, s.c_str());
+
     glColor3f(0.07058823529, 0.36078431372, 0.94117647058);
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -153,6 +169,8 @@ void Rectangle::stage1()
             output(-450+(shape_width*5), -60, "d", 6);
             output(-450+(shape_width*5), -70-(shape_height*5), "c", 6);
             output(-480, -70-(shape_height*5), "b", 6);
+            output(-490, (-60-70-(shape_height*5))/2, shape_h, 6);
+            output((-480-450+(shape_width*5))/2,-80-(shape_height*5),shape_w, 6);
       glBegin(GL_LINES);
           glVertex2f(-480,0);
           glVertex2f(-450+(shape_width*5), 0);
@@ -172,6 +190,8 @@ void Rectangle::stage1()
             output(-450+(shape_width*5), 50, "c\'", 6);
             output(-450+(shape_width*5), 50+(shape_height*5), "d\'", 6);
             output(-480, 50+(shape_height*5), "a\'", 6);
+            output(-490, (50+50+(shape_height*5))/2, shape_h, 6);
+            output((-480-450+(shape_width*5))/2, 60+(shape_height*5),shape_w, 6);
       glBegin(GL_LINES);
           glVertex2f(-480,0);
           glVertex2f(-450+(shape_width*5), 0);
@@ -186,6 +206,15 @@ void Rectangle::stage1()
 
 void Rectangle::stage2()
 {
+  using namespace std;
+
+  stringstream ss_3;
+  ss_3<<plane_angle;
+  string s;
+  ss_3>>s;
+  int n=s.length();
+  char plane_a[n+1];
+  strcpy(plane_a, s.c_str());
   glColor3f(0.07058823529, 0.36078431372, 0.94117647058);
   glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
@@ -197,6 +226,8 @@ void Rectangle::stage2()
       glVertex2f(-380+(shape_width*5)+(shape_width*5*cos(plane_angle*pi/180)), shape_width*5*sin(plane_angle*pi/180));
     glEnd();
       drawArc(-380+(shape_width*5), 0, plane_angle, 50);
+      output(-325+(shape_width*5), 10, plane_a, 6);
+      drawArc(-300+(shape_width*5), 30, 360, 2.5);
           output(-380+(shape_width*5), -20, "a\', b\'", 6);
           output(-380+(shape_width*5)+(shape_width*5*cos(plane_angle*pi/180)), shape_width*5*sin(plane_angle*pi/180), "d\', c\'", 6);
 
@@ -219,6 +250,8 @@ void Rectangle::stage2()
       glVertex2f(-380+(shape_width*5)+(shape_width*5*cos(plane_angle*pi/180)), shape_width*5*sin(-plane_angle*pi/180));
     glEnd();
       drawArc(-380+(shape_width*5), 0, -plane_angle, 50);
+      output(-325+(shape_width*5), -30, plane_a, 6);
+      drawArc(-300+(shape_width*5), -10, 360, 2.5);
           output(-380+(shape_width*5), 10, "a\', b\'", 6);
           output(-380+(shape_width*5)+(shape_width*5*cos(plane_angle*pi/180)), shape_width*5*sin(-plane_angle*pi/180), "d\', c\'", 6);
 
