@@ -417,9 +417,6 @@ void Rectangle::output(int x, int y, const char *string, int font_id)
 
 void Rectangle::drawArc(float center_x, float center_y, float arc_angle, float arc_radius)
 {
-  // int length=snprintf(NULL, 0, "%f", arc_angle);
-  // char* str=malloc(length+1);
-  // snprintf(str, length+1, "%f", arc_angle);
   glBegin(GL_POINTS);
   float x, y, i;
 
@@ -431,7 +428,6 @@ void Rectangle::drawArc(float center_x, float center_y, float arc_angle, float a
           y = center_y+(arc_radius*sin(i));
           glVertex2f(x, y);
       }
-      // output(x+10, center_x, str, 6);
     }
     else
     {
@@ -442,9 +438,7 @@ void Rectangle::drawArc(float center_x, float center_y, float arc_angle, float a
           glVertex2f(x, y);
 
       }
-      // output(x+10, center_x, str, 6);
     }
-  // free(str);
   glEnd();
 }
 
